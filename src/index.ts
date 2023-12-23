@@ -1,20 +1,8 @@
-import http from "node:http";
+import express from "express";
+import route from "./routes/routes";
 
-const requestListener: http.RequestListener = (_req, response) => {
-  if (_req.url === "/api/users") {
-    response.writeHead(200, {
-      "Content-Type": "application/json",
-      "X-Powered-By": "Node.js",
-    });
-  }
-  response.end(
-    JSON.stringify({
-      users: [],
-    })
-  );
-};
+const app = express();
+const port = 5500;
 
-const server = http.createServer(requestListener);
-server.listen(5500, () => {
-  console.log("Server is listening on port http://localhost:5500");
-});
+app.use(route);
+app.listen(port);
